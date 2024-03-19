@@ -3,8 +3,8 @@ export interface Day_Type {
   date: string | null;
   type: string | null;
   isToday: boolean;
-  isBeforeToday: boolean;
-  isAfterToday: boolean;
+  isBefore: boolean;
+  isAfter: boolean;
   isHoliday: boolean;
 }
 
@@ -40,7 +40,7 @@ export function getMonths(pastYearRange: number, futureYearRange: number) {
   return months;
 }
 
-export function getWeeks(month: string, startDate: string | null, endDate: string | null) {
+export function getWeeks(month: string, startDate: string | null, endDate: string | null, disabledBefore?: Date , disabledAfter?: Date ) {
   const today = moment().format("YYYY-MM-DD");
   const currentMonth = moment(month).month();
   const currentDate = moment(month).startOf("month");
@@ -55,8 +55,8 @@ export function getWeeks(month: string, startDate: string | null, endDate: strin
         type: null,
         date: null,
         isToday: false,
-        isBeforeToday: false,
-        isAfterToday: false,
+        isBefore: false,
+        isAfter: false,
         isHoliday: false,
       };
       const currentDateString = currentDate.format("YYYY-MM-DD");
@@ -81,17 +81,17 @@ export function getWeeks(month: string, startDate: string | null, endDate: strin
         }
 
         const date = currentDate.clone().format("YYYY-MM-DD");
-        const passedDayFromToday = currentDate.diff(moment(), "day") < 0;
-        const futureDayFromToday = currentDate.diff(moment(), "hours") > 0;
+        const passedDayFrom = currentDate.diff(moment(disabledBefore), "day") < 0;
+        const futureDayFrom = currentDate.diff(moment(disabledAfter), "hours") > 0;
         dayObj.date = date;
         if (date === today) {
           dayObj.isToday = true;
         }
-        if (passedDayFromToday) {
-          dayObj.isBeforeToday = true;
+        if (passedDayFrom) {
+          dayObj.isBefore = true;
         }
-        if (futureDayFromToday) {
-          dayObj.isAfterToday = true;
+        if (futureDayFrom) {
+          dayObj.isAfter = true;
         }
         if (i === 0 || i === 6) {
           dayObj.isHoliday = true;

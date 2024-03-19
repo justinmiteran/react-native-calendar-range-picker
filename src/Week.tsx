@@ -12,8 +12,8 @@ interface Props {
   locale: LOCALE_TYPE;
   handlePress: (date: string) => void;
   is6Weeks: boolean;
-  disabledBeforeToday?: boolean;
-  disabledAfterToday?: boolean;
+  disabledBefore?: Date;
+  disabledAfter?: Date;
   style?: Style;
 }
 
@@ -22,8 +22,8 @@ function Week({
   locale,
   handlePress,
   is6Weeks,
-  disabledBeforeToday,
-  disabledAfterToday,
+  disabledBefore,
+  disabledAfter,
   style,
 }: Props) {
   const renderDayNames = () => {
@@ -33,7 +33,7 @@ function Week({
       const DayComponent = day.date ? (
         <TouchableOpacity
           disabled={
-            (disabledBeforeToday && day.isBeforeToday) || (disabledAfterToday && day.isAfterToday)
+            (disabledBefore && day.isBefore) || (disabledAfter && day.isAfter)
           }
           style={{
             flex: 1,
@@ -47,8 +47,8 @@ function Week({
           <Day
             day={day}
             locale={locale}
-            disabledBeforeToday={disabledBeforeToday}
-            disabledAfterToday={disabledAfterToday}
+            disabledBefore={disabledBefore}
+            disabledAfter={disabledAfter}
             style={style}
           />
         </TouchableOpacity>

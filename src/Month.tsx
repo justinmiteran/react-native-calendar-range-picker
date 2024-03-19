@@ -15,8 +15,8 @@ interface Props {
   startDate: string | null;
   endDate: string | null;
   isMonthFirst?: boolean;
-  disabledBeforeToday?: boolean;
-  disabledAfterToday?: boolean;
+  disabledBefore?: Date;
+  disabledAfter?: Date;
   style?: Style;
 }
 
@@ -28,8 +28,8 @@ function Month({
   startDate,
   endDate,
   isMonthFirst,
-  disabledBeforeToday,
-  disabledAfterToday,
+  disabledBefore,
+  disabledAfter,
   style,
 }: Props) {
   const { year, month } = item;
@@ -50,7 +50,7 @@ function Month({
 
   const renderWeeks = () => {
     const result = [];
-    const weeks: Week_Type[] = getWeeks(item.id, startDate, endDate);
+    const weeks: Week_Type[] = getWeeks(item.id, startDate, endDate, disabledBefore, disabledAfter);
     const is6Weeks = weeks.length > 5;
 
     for (let i = 0; i < weeks.length; i++) {
@@ -61,8 +61,8 @@ function Month({
           locale={locale}
           handlePress={handlePress}
           is6Weeks={is6Weeks}
-          disabledBeforeToday={disabledBeforeToday}
-          disabledAfterToday={disabledAfterToday}
+          disabledBefore={disabledBefore}
+          disabledAfter={disabledAfter}
           style={style}
         />
       );

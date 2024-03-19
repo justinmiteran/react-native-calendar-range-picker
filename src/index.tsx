@@ -38,8 +38,8 @@ interface Props {
   initialNumToRender?: number;
   flatListProps?: any;
   isMonthFirst?: boolean;
-  disabledBeforeToday?: boolean;
-  disabledAfterToday?: boolean;
+  disabledBefore?: Date;
+  disabledAfter?: Date;
 }
 
 export default function Index({
@@ -54,8 +54,8 @@ export default function Index({
   singleSelectMode,
   flatListProps,
   isMonthFirst,
-  disabledBeforeToday,
-  disabledAfterToday,
+  disabledBefore,
+  disabledAfter,
 }: Props) {
   const [startDate, setStartDate] = useState(prevStartDate ? prevStartDate : null);
   const [endDate, setEndDate] = useState(prevEndDate ? prevEndDate : null);
@@ -117,8 +117,8 @@ export default function Index({
       style={style}
       flatListProps={flatListProps}
       isMonthFirst={isMonthFirst}
-      disabledBeforeToday={disabledBeforeToday}
-      disabledAfterToday={disabledAfterToday}
+      disabledBefore={disabledBefore}
+      disabledAfter={disabledAfter}
     />
   );
 }

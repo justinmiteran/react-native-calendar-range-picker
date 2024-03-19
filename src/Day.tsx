@@ -9,13 +9,13 @@ import { Style } from "./index";
 interface Props {
   day: Day_Type;
   locale: LOCALE_TYPE;
-  disabledBeforeToday?: boolean;
-  disabledAfterToday?: boolean;
+  disabledBefore?: Date;
+  disabledAfter?: Date;
   style?: Style;
 }
 
-function Day({ day, locale, disabledBeforeToday, disabledAfterToday, style }: Props) {
-  const { date, type, isHoliday, isToday, isBeforeToday, isAfterToday } = day;
+function Day({ day, locale, disabledBefore, disabledAfter, style }: Props) {
+  const { date, type, isHoliday, isToday, isBefore, isAfter } = day;
 
   const dayTextColor = style?.dayTextColor || "#1d1c1d";
   const holidayColor = style?.holidayColor || "#f26522";
@@ -41,7 +41,7 @@ function Day({ day, locale, disabledBeforeToday, disabledAfterToday, style }: Pr
   };
   let dayStyle: any = {
     color:
-      (disabledBeforeToday && isBeforeToday) || (disabledAfterToday && isAfterToday)
+      (disabledBefore && isBefore) || (disabledAfter && isAfter)
         ? disabledTextColor
         : isToday
         ? todayColor

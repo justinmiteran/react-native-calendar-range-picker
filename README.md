@@ -60,8 +60,8 @@ Common props you may want to specify include:
 | `initialNumToRender`  | `number`             | FlatList initialNumToRender prop.(to protect slow initial render)(default = 7)                          |
 | `flatListProps`       | `FlatList Props`     | FlatList all props.                                                                                     |
 | `isMonthFirst`        | `boolean`            | Switch year and month order. (2021 April -> April 2021)                                                 |
-| `disabledBeforeToday` | `boolean`            | Disable select day before today.                                                                        |
-| `disabledAfterToday`  | `boolean`            | Disable select day after today.                                                                         |
+| `disabledBefore`      | `Date`               | Disable select day before this date.                                                                        |
+| `disabledAfter`       | `Date`               | Disable select day after this date.                                                                         |
 | `style`               | `object`             | Customize style.                                                                                        |
 
 ### Locale
